@@ -1,185 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
 <head>
-    <meta charset="utf-8">
-    <title>Junta nuestras fotos</title>
-    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1,maximum-scale=1" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <link rel="apple-touch-icon" href="personalizar/fotos/fruta-11.png" />
-    <link rel="icon" href="personalizar/fotos/fruta-11.png" />
-    <link rel="stylesheet" type="text/css" href="style-mobile.css" />
-
-    <!-- Personalización: textos y fotos (editar SOLO personalizar/config.js) -->
-    <script src="personalizar/config.js" charset="utf-8"></script>
-    <script>
-    (function() {
-        var P = window.PERSONALIZAR || {};
-        if (P.titulo) document.title = P.titulo;
-
-        // Textos que muestra el juego (los usa src/project.js)
-        var t = {
-            finDelJuego: "FIN DEL JUEGO", verPuntaje: "Toca para ver tu puntaje", continuar: "Toca para continuar",
-            superaste: "¡Superaste al {n}% de los jugadores!", record: "Récord:", empezar: "Empezar",
-            jugarOtraVez: "Jugar otra vez", masJuegos: "Más juegos"
-        };
-        for (var k in (P.textos || {})) t[k] = P.textos[k];
-        window.TXT = t;
-        window.ENLACE_MAS_JUEGOS = P.enlaceMasJuegos || "";
-
-        // Fotos: cada fruta (de la más chica a la más grande) se reemplaza por la foto del mismo puesto,
-        // recortada en círculo y al tamaño exacto de la fruta original (si no, el juego da error).
-        var FRUTAS = [
-            ["ad16ccdc-975e-4393-ae7b-8ac79c3795f2", 52, 52],   ["0cbb3dbb-2a85-42a5-be21-9839611e5af7", 80, 80],
-            ["d0c676e4-0956-4a03-90af-fee028cfabe4", 108, 108], ["74237057-2880-4e1f-8a78-6d8ef00a1f5f", 119, 119],
-            ["132ded82-3e39-4e2e-bc34-fc934870f84c", 153, 152], ["03c33f55-5932-4ff7-896b-814ba3a8edb8", 183, 183],
-            ["665a0ec9-6c43-4858-974c-025514f2a0e7", 193, 193], ["84bc9d40-83d0-480c-b46a-3ef59e603e14", 258, 258],
-            ["5fa0264d-acbf-4a7b-8923-c106ec3b9215", 308, 308], ["564ba620-6a55-4cbe-a5a6-6fa3edd80151", 308, 309],
-            ["5035266c-8df3-4236-8d82-a375e97a0d9c", 408, 408]
-        ];
-        var fotos = P.fotos || [];
-        var desc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
-        if (!desc || !desc.set) return;
-
-        function enCirculo(foto, w, h) {
-            var c = document.createElement("canvas");
-            c.width = w; c.height = h;
-            var g = c.getContext("2d");
-            var lado = Math.min(foto.naturalWidth, foto.naturalHeight);       // lo del centro, cuadrado
-            g.beginPath();
-            g.arc(w / 2, h / 2, Math.min(w, h) / 2, 0, Math.PI * 2);
-            g.clip();
-            g.drawImage(foto, (foto.naturalWidth - lado) / 2, (foto.naturalHeight - lado) / 2, lado, lado, 0, 0, w, h);
-            return c.toDataURL("image/png");
-        }
-
-        Object.defineProperty(HTMLImageElement.prototype, "src", {
-            configurable: true, enumerable: true,
-            get: function() { return desc.get.call(this); },
-            set: function(url) {
-                var i = -1;
-                if (typeof url === "string" && url.indexOf("raw-assets") >= 0) {
-                    for (var k = 0; k < FRUTAS.length; k++) if (url.indexOf(FRUTAS[k][0]) >= 0) { i = k; break; }
-                }
-                if (i < 0 || !fotos[i]) return desc.set.call(this, url);
-                var img = this, foto = new Image();
-                foto.onload = function() {
-                    try { desc.set.call(img, enCirculo(foto, FRUTAS[i][1], FRUTAS[i][2])); }
-                    catch (e) { desc.set.call(img, url); }
-                };
-                foto.onerror = function() { desc.set.call(img, url); };    // foto que no existe: la fruta
-                desc.set.call(foto, fotos[i] + (fotos[i].indexOf("?") < 0 ? "?v=" + (P.version || 1) : ""));
-            }
-        });
-    })();
-    </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sol</title>
+<meta name="description" content="Tus ingresos, gastos, cuentas, préstamos, deudas y metas en un solo lugar.">
+<meta name="theme-color" content="#0a1240" id="theme-color">
+<link rel="manifest" href="manifest.json?v=5">
+<link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png?v=5">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=5">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sol">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<script>
+  // Aplica el modo y el color guardados antes de dibujar, para que no parpadee
+  (function(){try{
+    var t=localStorage.getItem("mf-tema")||"dark";
+    document.documentElement.setAttribute("data-theme",t);
+    var c=JSON.parse(localStorage.getItem("mf-hsl")||"null");
+    if(c){var s=document.documentElement.style;s.setProperty("--h",c[0]);s.setProperty("--s",c[1]+"%");s.setProperty("--l",c[2]+"%");}
+  }catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
+<body>
+<div class="bgfx" aria-hidden="true"></div>
 
-<body style="margin: 0; background: #ddd;" align="center">
+<!-- Pantalla de carga -->
+<div id="screen-loading" class="center-screen">
+  <img class="brandlogo" src="icons/logo-160.png?v=5" alt="" width="76" height="76">
+  <p class="muted">Cargando…</p>
+</div>
 
-    <div id="canvasDiv" style="width:100%;height:100%;">
-        <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
-        <div id="block-Box" style="display:block;width:100%;height:100%;"></div>
+<!-- Pantalla de ingreso -->
+<div id="screen-login" class="center-screen" hidden>
+  <div class="glass login-card">
+    <img class="brandlogo" src="icons/logo-160.png?v=5" alt="" width="76" height="76">
+    <h1 class="login-title"><span>Sol</span></h1>
+    <p class="muted login-copy">Tus ingresos, gastos, cuentas, préstamos y metas, en un solo lugar.</p>
+    <button class="btn big" id="btn-login">
+      <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.2-.1-2.3-.4-3.5z"/></svg>
+      Entrar con Google
+    </button>
+    <p class="muted small" id="login-error" role="alert"></p>
+  </div>
+</div>
+
+<!-- Pantalla sin acceso -->
+<div id="screen-denied" class="center-screen" hidden>
+  <div class="glass login-card">
+    <img class="brandlogo" src="icons/logo-160.png?v=5" alt="" width="76" height="76">
+    <h1 class="login-title">Sin acceso</h1>
+    <p class="muted login-copy">La cuenta <strong id="denied-email"></strong> no está en la lista de personas permitidas. Pídele a quien administra la app que agregue tu correo.</p>
+    <button class="btn ghost" id="btn-logout-denied">Usar otra cuenta</button>
+  </div>
+</div>
+
+<!-- App -->
+<div id="screen-app" hidden>
+  <header>
+    <div class="wrap">
+      <div class="glass bar">
+        <span id="avatar" class="avatar" aria-hidden="true"></span>
+        <div class="hello"><small id="hello-sub">Hola</small><strong id="hello-name">Sol</strong></div>
+        <button class="iconbtn" id="btn-theme" aria-label="Cambiar a modo día o noche"></button>
+        <label class="iconbtn" title="Cambiar color" aria-label="Cambiar color de la app">
+          <span class="swatch" aria-hidden="true"></span>
+          <input type="color" id="color-pick" aria-label="Elegir color">
+        </label>
+      </div>
+      <nav class="glass tabs" role="tablist" id="tabs"></nav>
     </div>
-
-    <div id="loadingText" style="width:100%;display: none;text-align:center;position:absolute;top:45%;z-index:2;font-size:20px;color:#f99f0a">
-        Cargando… 0%
+  </header>
+  <div class="wrap">
+    <div class="monthnav" id="monthnav">
+      <button class="iconbtn" id="prev" aria-label="Anterior">‹</button>
+      <div class="mid"><strong id="mlabel"></strong><div class="mswitch" id="mswitch" role="group" aria-label="Ver mes o año"></div></div>
+      <button class="iconbtn" id="next" aria-label="Siguiente">›</button>
     </div>
-    <div id="splash"></div>
-    <div id="loadingImg" style="top:45%;width: 100%;position:absolute; ">
-        <img src="res/loading.gif" width="7%" height="7%" />
-    </div>
+    <div class="status" id="status"></div>
+    <main id="app"></main>
+  </div>
+</div>
 
-    <!-- ads.js no muestra anuncios: es la función que abre la escena del juego (noAdGoToScene) -->
-    <script type="text/javascript" src="ads.js"></script>
+<div id="layer"></div>
 
-    <script type="text/javascript">
-        var preloader;
-        var adCompleteFlag = false;
-        var resCompleteFlag = false;
-        var adEndComplete = false;
-        var resEndComplete = false;
-
-        var loadintT = document.getElementById("loadingText");
-        var loadintGif = document.getElementById("loadingImg");
-        setTimeout(function() {
-            loadintGif.remove();
-            loadintT.style.display = "";
-            updateLabView(0.1);
-        }, 1 * 1000);
-
-        window.timer = null;
-        window.tempSeconds = 1;
-        window.loadData = {};
-        loadData.completedCount = 0;
-        loadData.totalCount = 0;
-
-        document.getElementById("canvasDiv").style.height = document.documentElement.clientHeight + "px";
-        window.onload = function() {
-            document.getElementById("block-Box").style.display = "none";
-        };
-
-        // Porcentaje de "Cargando…" (aproximado, como en el original)
-        function updateLabView(t) {
-            if (timer != null) clearInterval(timer);
-            timer = setInterval(function() {
-                tempSeconds++;
-                actualTotal();
-                var loadintT = document.getElementById("loadingText");
-                if (!loadintT) return;
-                loadintT.innerHTML = "Cargando… " + parseInt(tempSeconds) + "%";
-                switch (tempSeconds) {
-                    case 20: updateLabView(0.2); break;
-                    case 40: updateLabView(0.3); break;
-                    case 60: updateLabView(0.4); break;
-                    case 96: updateLabView(5); break;
-                    case 97: updateLabView(10); break;
-                    case 98: updateLabView(50); break;
-                    case 99: updateLabView(100); break;
-                    default: if (tempSeconds >= 80 && tempSeconds < 96) updateLabView(t + 0.1);
-                }
-                if (tempSeconds > 100) {
-                    clearInterval(timer);
-                    tempSeconds = 100;
-                    loadintT.innerHTML = "Cargando… 100%";
-                }
-            }, t * 1000);
-        }
-
-        function actualTotal() {
-            var percent = parseInt(100 * loadData.completedCount / loadData.totalCount);
-            if (percent > tempSeconds && loadData.totalCount > 1) tempSeconds = percent;
-        }
-    </script>
-
-    <script src="src/settings.js" charset="utf-8"></script>
-    <script src="main.js" charset="utf-8"></script>
-
-    <script>
-        window.adsbygoogle = window.adsbygoogle || [];
-        const adBreak = function(o) { adsbygoogle.push(o); };
-    </script>
-
-    <script type="text/javascript">
-        (function() {
-            document.getElementById('splash').style.display = 'block';
-            var cocos2d = document.createElement('script');
-            cocos2d.async = true;
-            cocos2d.src = window._CCSettings.debug ? 'cocos2d-js.js' : 'cocos2d-js-min.js';
-            var engineLoaded = function() {
-                document.body.removeChild(cocos2d);
-                cocos2d.removeEventListener('load', engineLoaded, false);
-                cc.sys.language = "en";        // los textos del juego salen de personalizar/config.js
-                window.boot();
-            };
-            cocos2d.addEventListener('load', engineLoaded, false);
-            document.body.appendChild(cocos2d);
-        })();
-    </script>
+<script src="config.js?v=5"></script>
+<script type="module" src="app.js?v=5"></script>
 </body>
-
 </html>
