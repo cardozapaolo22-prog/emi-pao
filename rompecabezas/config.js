@@ -16,7 +16,8 @@ window.ROMPECABEZAS = {
     { foto: "fotos/foto-mwycmra2.jpg", piezas: 3, mensaje: "Me encantas, mi amorcito ❤" },
     { foto: "../personalizar/fotos/fruta-07.png", piezas: 3, mensaje: "Cada foto contigo es mi favorita." },
     { foto: "../personalizar/fotos/fruta-10.png", piezas: 4, mensaje: "Contigo todo es más bonito." },
-    { foto: "../personalizar/fotos/fruta-09.png", piezas: 5, mensaje: "Y lo mejor todavía está por venir." }
+    { foto: "../personalizar/fotos/fruta-09.png", piezas: 5, mensaje: "Y lo mejor todavía está por venir." },
+    { foto: "fotos/foto-mwycsz4q.jpg", piezas: 3, mensaje: "" }
   ],
 
   // Al terminar todas las fotos
