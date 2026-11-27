@@ -12,9 +12,9 @@ window.ROMPECABEZAS = {
   inicio: "Arma nuestras fotos: cada una esconde un mensaje.",
 
   niveles: [
-    { foto: "../personalizar/fotos/fruta-11.png", piezas: 3, mensaje: "Me encantas, mi amorcito ❤" },
     { foto: "fotos/foto-mwyc80g8.jpg", piezas: 4, mensaje: "Gracias por cada risa y cada abrazo." },
     { foto: "../personalizar/fotos/fruta-07.png", piezas: 3, mensaje: "Cada foto contigo es mi favorita." },
+    { foto: "../personalizar/fotos/fruta-11.png", piezas: 3, mensaje: "Me encantas, mi amorcito ❤" },
     { foto: "../personalizar/fotos/fruta-10.png", piezas: 4, mensaje: "Contigo todo es más bonito." },
     { foto: "../personalizar/fotos/fruta-09.png", piezas: 5, mensaje: "Y lo mejor todavía está por venir." }
   ],
