@@ -13,7 +13,7 @@ window.ROMPECABEZAS = {
 
   niveles: [
     { foto: "fotos/foto-mwycm3vk.jpg", piezas: 3, mensaje: "Gracias por cada risa y cada abrazo." },
-    { foto: "fotos/foto-mwycmra2.jpg", piezas: 4, mensaje: "Me encantas, mi amorcito ❤" },
+    { foto: "fotos/foto-mwycmra2.jpg", piezas: 3, mensaje: "Me encantas, mi amorcito ❤" },
     { foto: "../personalizar/fotos/fruta-07.png", piezas: 3, mensaje: "Cada foto contigo es mi favorita." },
     { foto: "../personalizar/fotos/fruta-10.png", piezas: 4, mensaje: "Contigo todo es más bonito." },
     { foto: "../personalizar/fotos/fruta-09.png", piezas: 5, mensaje: "Y lo mejor todavía está por venir." }
