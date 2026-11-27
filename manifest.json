@@ -1,0 +1,11 @@
+{
+  "name": "Emi & Pao · Juegos",
+  "short_name": "Emi & Pao",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffe3ea",
+  "theme_color": "#ffd9e1",
+  "icons": [{ "src": "personalizar/fotos/fruta-11.png", "sizes": "408x408", "type": "image/png" }]
+}

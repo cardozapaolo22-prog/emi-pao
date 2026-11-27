@@ -1,15 +1,13 @@
 # emi-pao ❤
 
-Dos juegos con nuestras fotos, para jugar en el celular:
+Nuestros juegos, en un solo lugar: **https://cardozapaolo22-prog.github.io/emi-pao/**
 
-* **Junta nuestras fotos** — las fotos caen y, al juntarse dos iguales, se convierten en la
-  siguiente: https://cardozapaolo22-prog.github.io/emi-pao/
-* **Nuestro rompecabezas** — arma cada foto deslizando las piezas; cada una esconde un mensaje:
-  https://cardozapaolo22-prog.github.io/emi-pao/rompecabezas/
+* **Junta nuestras fotos** (`juntar.html`): las fotos caen y, al juntarse dos iguales, se convierten en la siguiente.
+* **Nuestro rompecabezas** (`rompecabezas/`): arma cada foto deslizando las piezas; cada una esconde un mensaje.
+* **Petris** (`petris/`): el Tetris de nuestras mascotas.
 
-Para cambiar fotos y textos: **[PERSONALIZAR.md](PERSONALIZAR.md)** (solo hay que editar
-`personalizar/config.js` y `rompecabezas/config.js`).
+**Cambiar fotos y mensajes:** entra a **https://cardozapaolo22-prog.github.io/emi-pao/admin/** con tu clave
+(o toca «🔒 Fotos» en el menú). Ver PERSONALIZAR.md.
 
 «Junta nuestras fotos» está hecho sobre el juego HTML5 de código abierto *合成大西瓜*
-(Cocos Creator 2.2.2), traducido al español, sin anuncios ni enlaces externos, y con las fotos y
-textos configurables desde `personalizar/`.
+(Cocos Creator 2.2.2), traducido al español, sin anuncios ni enlaces externos.

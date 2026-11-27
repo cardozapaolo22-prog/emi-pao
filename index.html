@@ -2,95 +2,156 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Sol</title>
-<meta name="description" content="Tus ingresos, gastos, cuentas, préstamos, deudas y metas en un solo lugar.">
-<meta name="theme-color" content="#0a1240" id="theme-color">
-<link rel="manifest" href="manifest.json?v=5">
-<link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png?v=5">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=5">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=5">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Emi & Pao · Juegos</title>
+<meta name="description" content="Nuestros juegos, en un solo lugar.">
+<meta name="theme-color" content="#1a1230">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Sol">
+<meta name="apple-mobile-web-app-title" content="Emi & Pao">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<script>
-  // Aplica el modo y el color guardados antes de dibujar, para que no parpadee
-  (function(){try{
-    var t=localStorage.getItem("mf-tema")||"dark";
-    document.documentElement.setAttribute("data-theme",t);
-    var c=JSON.parse(localStorage.getItem("mf-hsl")||"null");
-    if(c){var s=document.documentElement.style;s.setProperty("--h",c[0]);s.setProperty("--s",c[1]+"%");s.setProperty("--l",c[2]+"%");}
-  }catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="personalizar/fotos/fruta-11.png">
+<link rel="apple-touch-icon" href="personalizar/fotos/fruta-11.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<script src="personalizar/config.js" charset="utf-8"></script>
+<script src="rompecabezas/config.js" charset="utf-8"></script>
+<style>
+:root { --noche:#120c20; --noche2:#24183f; --vidrio:rgba(255,255,255,.06); --vidrio2:rgba(255,255,255,.1); --borde:rgba(255,255,255,.11);
+  --texto:#fff5ec; --suave:rgba(255,245,236,.62); --rosa:#ff6f91; --rosa-osc:#c7466a; --dorado:#ffc75f; --menta:#7de0c3;
+  --display:"Fredoka",ui-rounded,"SF Pro Rounded",system-ui,sans-serif; --cuerpo:"Nunito",ui-rounded,"SF Pro Rounded",-apple-system,"Segoe UI",Roboto,sans-serif; }
+* { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { margin:0; }
+html { background:#120c20; }
+body { font-family:var(--cuerpo); color:var(--texto); min-height:100vh; overflow-x:hidden;
+  background: radial-gradient(70% 45% at 0% 0%, rgba(255,111,145,.22), transparent 70%), radial-gradient(60% 40% at 100% 30%, rgba(255,199,95,.12), transparent 70%), linear-gradient(180deg,var(--noche2),var(--noche) 55%);
+  padding: calc(env(safe-area-inset-top) + 18px) 16px calc(env(safe-area-inset-bottom) + 30px); }
+#estrellas { position:fixed; inset:0; pointer-events:none; z-index:0; }
+#estrellas i { position:absolute; width:2px; height:2px; border-radius:50%; background:#fff; opacity:.5; animation:brillo 3s ease-in-out infinite; }
+@keyframes brillo { 50% { opacity:.08; } }
+main { position:relative; z-index:1; max-width:560px; margin:0 auto; }
+a { color:inherit; text-decoration:none; }
+
+/* cabecera */
+.marca { display:flex; align-items:center; gap:10px; }
+.logo { width:44px; height:44px; border-radius:14px; display:grid; place-items:center; font-size:22px; background:linear-gradient(150deg,var(--rosa),#ff9a6b); box-shadow:0 6px 18px rgba(255,111,145,.4); }
+.marca b { font-family:var(--display); font-weight:700; font-size:22px; letter-spacing:.01em; }
+.marca small { display:block; color:var(--suave); font-weight:700; font-size:13px; }
+.panel { margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-weight:800; font-size:13px; padding:9px 13px; border-radius:999px; background:var(--vidrio); border:1px solid var(--borde); }
+.panel:active { background:var(--vidrio2); }
+h1 { font-family:var(--display); font-weight:600; font-size:clamp(30px,8.5vw,40px); line-height:1.08; margin:26px 0 6px; letter-spacing:-.01em; }
+h1 em { font-style:normal; background:linear-gradient(90deg,var(--rosa),var(--dorado)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.sub { color:var(--suave); font-weight:700; margin:0 0 22px; }
+
+/* destacado: Petris */
+.destacado { position:relative; display:block; border-radius:28px; overflow:hidden; isolation:isolate; background:#1b1036;
+  border:1px solid rgba(255,255,255,.16); box-shadow:0 24px 50px rgba(0,0,0,.5), 0 0 60px rgba(120,80,255,.18); transition:transform .15s; }
+.destacado:active { transform:scale(.985); }
+.portada-petris { display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; }
+.pie-destacado { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px 16px;
+  background:linear-gradient(180deg,rgba(27,16,54,.0),#1b1036 30%); margin-top:-26px; position:relative; }
+.pie-destacado p { margin:6px 0 0; font-family:var(--display); font-weight:600; font-size:17px; line-height:1.2; }
+.etq { display:inline-flex; align-items:center; gap:6px; background:var(--dorado); color:#3d2600; font-weight:900; font-size:11px; letter-spacing:.12em; padding:5px 11px; border-radius:999px; }
+.jugar { flex:none; display:inline-flex; align-items:center; gap:8px; background:linear-gradient(180deg,#ff86a3,var(--rosa)); color:#fff; font-family:var(--display); font-weight:600; font-size:18px;
+  padding:12px 22px; border-radius:999px; box-shadow:0 5px 0 var(--rosa-osc), 0 12px 24px rgba(255,111,145,.35); }
+.jugar svg { width:16px; height:16px; }
+.stat { display:block; margin-top:4px; font-weight:800; font-size:13px; color:var(--suave); }
+.stat b { color:var(--dorado); font-family:var(--display); font-weight:600; font-size:15px; }
+
+/* rejilla de juegos */
+.rejilla { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+.juego { display:flex; flex-direction:column; border-radius:26px; overflow:hidden; background:var(--vidrio); border:1px solid var(--borde); box-shadow:0 14px 30px rgba(0,0,0,.3); transition:transform .15s; }
+.juego:active { transform:scale(.97); }
+.portada { position:relative; aspect-ratio:1/1; overflow:hidden; }
+.info { padding:12px 14px 14px; }
+.info h3 { margin:0; font-family:var(--display); font-weight:600; font-size:18px; line-height:1.15; }
+.info p { margin:4px 0 0; color:var(--suave); font-weight:700; font-size:13px; }
+.barra { height:6px; border-radius:3px; background:rgba(255,255,255,.1); margin-top:10px; overflow:hidden; }
+.barra i { display:block; height:100%; background:linear-gradient(90deg,var(--rosa),var(--dorado)); border-radius:3px; }
+
+.p-junta { background: radial-gradient(circle at 50% 110%, #ff9a6b, #ffb68a 45%, #ffd7b0); }
+.p-junta img { position:absolute; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:0 6px 14px rgba(120,40,0,.3); }
+.p-rompe { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; padding:3px; background:linear-gradient(150deg,#ffd6e0,#ffe9d6); }
+.p-rompe i { border-radius:8px; background-size:300% 300%; }
+.p-rompe i.hueco { background:rgba(255,255,255,.5) !important; box-shadow: inset 0 0 0 2px rgba(255,111,145,.35); }
+
+.pie { text-align:center; color:var(--suave); font-weight:700; font-size:13px; margin-top:26px; }
+.pie span { color:var(--rosa); }
+</style>
 </head>
 <body>
-<div class="bgfx" aria-hidden="true"></div>
-
-<!-- Pantalla de carga -->
-<div id="screen-loading" class="center-screen">
-  <img class="brandlogo" src="icons/logo-160.png?v=5" alt="" width="76" height="76">
-  <p class="muted">Cargando…</p>
-</div>
-
-<!-- Pantalla de ingreso -->
-<div id="screen-login" class="center-screen" hidden>
-  <div class="glass login-card">
-    <img class="brandlogo" src="icons/logo-160.png?v=5" alt="" width="76" height="76">
-    <h1 class="login-title"><span>Sol</span></h1>
-    <p class="muted login-copy">Tus ingresos, gastos, cuentas, préstamos y metas, en un solo lugar.</p>
-    <button class="btn big" id="btn-login">
-      <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.2-.1-2.3-.4-3.5z"/></svg>
-      Entrar con Google
-    </button>
-    <p class="muted small" id="login-error" role="alert"></p>
-  </div>
-</div>
-
-<!-- Pantalla sin acceso -->
-<div id="screen-denied" class="center-screen" hidden>
-  <div class="glass login-card">
-    <img class="brandlogo" src="icons/logo-160.png?v=5" alt="" width="76" height="76">
-    <h1 class="login-title">Sin acceso</h1>
-    <p class="muted login-copy">La cuenta <strong id="denied-email"></strong> no está en la lista de personas permitidas. Pídele a quien administra la app que agregue tu correo.</p>
-    <button class="btn ghost" id="btn-logout-denied">Usar otra cuenta</button>
-  </div>
-</div>
-
-<!-- App -->
-<div id="screen-app" hidden>
-  <header>
-    <div class="wrap">
-      <div class="glass bar">
-        <span id="avatar" class="avatar" aria-hidden="true"></span>
-        <div class="hello"><small id="hello-sub">Hola</small><strong id="hello-name">Sol</strong></div>
-        <button class="iconbtn" id="btn-theme" aria-label="Cambiar a modo día o noche"></button>
-        <label class="iconbtn" title="Cambiar color" aria-label="Cambiar color de la app">
-          <span class="swatch" aria-hidden="true"></span>
-          <input type="color" id="color-pick" aria-label="Elegir color">
-        </label>
-      </div>
-      <nav class="glass tabs" role="tablist" id="tabs"></nav>
-    </div>
+<div id="estrellas" aria-hidden="true"></div>
+<main>
+  <header class="marca">
+    <div class="logo" aria-hidden="true">❤</div>
+    <div><b>Emi & Pao</b><small>Nuestros juegos</small></div>
+    <a class="panel" href="admin/">🔒 Fotos</a>
   </header>
-  <div class="wrap">
-    <div class="monthnav" id="monthnav">
-      <button class="iconbtn" id="prev" aria-label="Anterior">‹</button>
-      <div class="mid"><strong id="mlabel"></strong><div class="mswitch" id="mswitch" role="group" aria-label="Ver mes o año"></div></div>
-      <button class="iconbtn" id="next" aria-label="Siguiente">›</button>
+
+  <h1>¿A qué jugamos<br><em>hoy?</em></h1>
+  <p class="sub" id="saludo">Elige un juego y que empiece la partida.</p>
+
+  <a class="destacado" href="petris/">
+    <img class="portada-petris" src="petris/portada.webp" alt="Petris: el Tetris de nuestras mascotas" width="1200" height="675">
+    <div class="pie-destacado">
+      <div><span class="etq">★ NUEVO</span><p>El Tetris de nuestras mascotas</p><span class="stat" id="st-petris"></span></div>
+      <span class="jugar">Jugar <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
     </div>
-    <div class="status" id="status"></div>
-    <main id="app"></main>
+  </a>
+
+  <div class="rejilla">
+    <a class="juego" href="juntar.html">
+      <div class="portada p-junta" id="portada-junta" aria-hidden="true"></div>
+      <div class="info"><h3>Junta nuestras fotos</h3><p>Junta dos iguales y crecen.</p></div>
+    </a>
+    <a class="juego" href="rompecabezas/">
+      <div class="portada p-rompe" id="portada-rompe" aria-hidden="true"></div>
+      <div class="info"><h3>Nuestro rompecabezas</h3><p id="st-rompe">Arma cada foto.</p><div class="barra" id="barra-rompe" hidden><i></i></div></div>
+    </a>
   </div>
-</div>
 
-<div id="layer"></div>
+  <p class="pie">Hecho con <span>❤</span> para Emi</p>
+</main>
 
-<script src="config.js?v=5"></script>
-<script type="module" src="app.js?v=5"></script>
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const leer = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
+
+// estrellas
+for (let i = 0; i < 40; i++) { const s = document.createElement("i"); s.style.left = Math.random() * 100 + "%"; s.style.top = Math.random() * 70 + "%"; s.style.animationDelay = -Math.random() * 3 + "s"; $("#estrellas").appendChild(s); }
+
+// saludo según la hora
+const hora = new Date().getHours();
+$("#saludo").textContent = hora < 12 ? "Buenos días ☀️ Elige un juego." : hora < 19 ? "Buenas tardes 🌤️ Elige un juego." : "Buenas noches 🌙 Una partidita antes de dormir.";
+
+// récord de Petris
+const rec = Number(leer("michis-record", 0)) || 0;
+if (rec) $("#st-petris").innerHTML = "Récord <b>" + rec.toLocaleString("es-PE") + "</b>";
+
+// portada de Junta fotos: tres fotos en círculo
+const P = window.PERSONALIZAR || {}, fotos = P.fotos || [], v = "?v=" + (P.version || 1);
+[[10, 12, 46, 58], [9, 58, 8, 36], [6, 62, 60, 26]].forEach(([i, x, y, t]) => {
+  if (!fotos[i]) return;
+  const im = new Image(); im.alt = ""; im.src = fotos[i] + v; im.onerror = () => im.remove();
+  im.style.cssText = `left:${x}%;top:${y}%;width:${t}%;height:${t}%`; $("#portada-junta").appendChild(im);
+});
+
+// portada del rompecabezas: la primera foto en 3x3 con un hueco, y el avance
+const R = window.ROMPECABEZAS || {}, niveles = R.niveles || [];
+const raw = niveles[0] && niveles[0].foto, foto = raw ? (/^(https?:|\/|data:)/.test(raw) ? raw : "rompecabezas/" + raw) : "";
+for (let k = 0; k < 9; k++) {
+  const i = document.createElement("i");
+  if (k === 8 || !foto) i.className = "hueco";
+  else { i.style.backgroundImage = `url("${foto}")`; i.style.backgroundPosition = `${(k % 3) * 50}% ${Math.floor(k / 3) * 50}%`; }
+  $("#portada-rompe").appendChild(i);
+}
+const hechos = Object.keys(leer("rompecabezas-hechos", {})).length;
+if (niveles.length) {
+  $("#st-rompe").textContent = hechos ? `${Math.min(hechos, niveles.length)} de ${niveles.length} fotos armadas` : `${niveles.length} fotos por armar`;
+  if (hechos) { $("#barra-rompe").hidden = false; $("#barra-rompe i").style.width = Math.min(100, hechos / niveles.length * 100) + "%"; }
+}
+</script>
 </body>
 </html>

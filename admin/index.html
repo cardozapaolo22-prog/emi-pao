@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fotos · Emi & Pao</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1a1230">
+<link rel="icon" href="../personalizar/fotos/fruta-11.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root { --noche:#120c20; --noche2:#24183f; --vidrio:rgba(255,255,255,.06); --vidrio2:rgba(255,255,255,.1); --borde:rgba(255,255,255,.12);
+  --texto:#fff5ec; --suave:rgba(255,245,236,.62); --rosa:#ff6f91; --rosa-osc:#c7466a; --dorado:#ffc75f; --menta:#7de0c3; --rojo:#ff8a80;
+  --display:"Fredoka",ui-rounded,"SF Pro Rounded",system-ui,sans-serif; --cuerpo:"Nunito",ui-rounded,"SF Pro Rounded",-apple-system,"Segoe UI",Roboto,sans-serif; }
+* { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { margin:0; }
+html { background:#120c20; }
+body { font-family:var(--cuerpo); color:var(--texto); min-height:100vh;
+  background: radial-gradient(70% 45% at 0% 0%, rgba(255,111,145,.2), transparent 70%), linear-gradient(180deg,var(--noche2),var(--noche) 50%);
+  padding: calc(env(safe-area-inset-top) + 16px) 16px calc(env(safe-area-inset-bottom) + 110px); }
+main { max-width:640px; margin:0 auto; }
+a { color:var(--rosa); }
+button, input, select, textarea { font:inherit; color:inherit; }
+button { cursor:pointer; border:0; background:none; }
+h1 { margin:0; font-family:var(--display); font-weight:600; font-size:26px; }
+h2 { margin:0 0 4px; font-family:var(--display); font-weight:600; font-size:20px; }
+p { line-height:1.45; }
+.suave { color:var(--suave); font-size:14px; font-weight:700; }
+.vidrio { background:var(--vidrio); border:1px solid var(--borde); border-radius:22px; padding:18px; }
+.boton { display:inline-flex; align-items:center; justify-content:center; gap:8px; white-space:nowrap; background:linear-gradient(180deg,#ff86a3,var(--rosa)); color:#fff; font-family:var(--display); font-weight:600; font-size:17px;
+  padding:12px 22px; border-radius:999px; box-shadow:0 4px 0 var(--rosa-osc), 0 10px 22px rgba(255,111,145,.3); text-decoration:none; }
+.boton:active { transform:translateY(3px); box-shadow:0 1px 0 var(--rosa-osc); }
+.boton.vidrio-b { background:var(--vidrio); border:1px solid var(--borde); box-shadow:none; color:var(--texto); font-size:15px; padding:9px 15px; }
+.boton[disabled] { opacity:.5; pointer-events:none; }
+.campo { display:grid; gap:6px; margin:12px 0; }
+.campo label { font-weight:800; font-size:14px; }
+input[type=password], input[type=text], textarea, select { width:100%; border:1px solid var(--borde); border-radius:14px; padding:12px 14px; background:rgba(0,0,0,.25); outline:none; }
+input:focus, textarea:focus, select:focus { border-color:var(--rosa); box-shadow:0 0 0 3px rgba(255,111,145,.2); }
+select option { color:#222; }
+textarea { resize:vertical; min-height:60px; }
+.error { color:var(--rojo); font-weight:800; font-size:14px; min-height:20px; }
+.check { display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px; color:var(--suave); margin:4px 0 10px; }
+.check input { width:18px; height:18px; accent-color:var(--rosa); }
+
+#login { max-width:400px; margin:9vh auto 0; }
+#login .logo { width:58px; height:58px; border-radius:18px; display:grid; place-items:center; font-size:26px; background:linear-gradient(150deg,var(--rosa),#ff9a6b); box-shadow:0 8px 22px rgba(255,111,145,.4); margin-bottom:14px; }
+details.ayuda { margin-top:14px; background:rgba(0,0,0,.2); border-radius:16px; padding:12px 14px; }
+details.ayuda summary { font-weight:800; cursor:pointer; color:var(--dorado); }
+details.ayuda ol { padding-left:20px; margin:10px 0 0; color:var(--suave); font-weight:700; font-size:14px; line-height:1.5; }
+details.ayuda b { color:var(--texto); }
+
+#app[hidden], #login[hidden] { display:none; }
+.cabecera { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.cabecera .esp { flex:1; }
+.tabs { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; background:var(--vidrio); border:1px solid var(--borde); padding:4px; border-radius:18px; margin:16px 0; }
+.tabs button { padding:10px 4px; border-radius:14px; font-weight:800; font-size:14px; color:var(--suave); }
+.tabs button[aria-pressed=true] { background:linear-gradient(180deg,#ff86a3,var(--rosa)); color:#fff; box-shadow:0 4px 12px rgba(255,111,145,.3); }
+.seccion[hidden] { display:none; }
+
+.nivel { display:grid; grid-template-columns:100px 1fr; gap:14px; background:var(--vidrio); border:1px solid var(--borde); border-radius:22px; padding:12px; margin-bottom:12px; }
+.nivel .foto { width:100px; height:100px; border-radius:16px; object-fit:cover; background:rgba(255,255,255,.08); display:block; }
+.nivel .num { font-family:var(--display); font-weight:600; color:var(--dorado); font-size:15px; }
+.nivel textarea { min-height:54px; padding:9px 11px; font-size:15px; }
+.nivel select { padding:9px 11px; font-size:14px; }
+.acciones { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.mini { padding:7px 12px; border-radius:999px; background:var(--vidrio2); font-weight:800; font-size:13px; }
+.mini:active { background:rgba(255,255,255,.18); }
+.mini.rojo { color:var(--rojo); }
+
+.frutas { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
+.fruta { background:var(--vidrio); border:1px solid var(--borde); border-radius:22px; padding:14px 10px; text-align:center; }
+.fruta .circulo { width:86px; height:86px; margin:4px auto 10px; border-radius:50%; overflow:hidden; background:rgba(255,255,255,.08); border:3px solid rgba(255,255,255,.85); box-shadow:0 6px 16px rgba(0,0,0,.35); }
+.fruta .circulo img { width:100%; height:100%; object-fit:cover; display:block; }
+.fruta b { display:block; font-family:var(--display); font-weight:600; font-size:16px; }
+.fruta small { display:block; color:var(--suave); font-size:12px; font-weight:700; min-height:16px; margin-bottom:8px; }
+.etiqueta { display:inline-block; font-size:11px; font-weight:900; letter-spacing:.06em; padding:3px 9px; border-radius:999px; background:rgba(125,224,195,.15); color:var(--menta); }
+.etiqueta.orig { background:var(--vidrio2); color:var(--suave); }
+
+#publicar { position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom) + 18px); transform:translateX(-50%); z-index:12; display:none; }
+#publicar.ver { display:inline-flex; }
+#toast { position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom) + 84px); transform:translateX(-50%); background:#fff; color:#3b2430; padding:12px 18px; border-radius:16px; font-weight:800; font-size:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.4); opacity:0; pointer-events:none; transition:opacity .2s; z-index:20; width:max-content; max-width:90vw; text-align:center; }
+#toast.ver { opacity:1; }
+#ocupado { position:fixed; inset:0; background:rgba(18,12,32,.75); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); display:none; place-items:center; z-index:15; font-family:var(--display); font-weight:600; font-size:20px; }
+#ocupado.ver { display:grid; }
+</style>
+</head>
+<body>
+<main>
+  <section id="login" class="vidrio">
+    <div class="logo" aria-hidden="true">🔒</div>
+    <h1>Fotos de los juegos</h1>
+    <p class="suave">Aquí cambias las fotos del rompecabezas y de «Junta nuestras fotos». Los cambios se guardan en tu GitHub.</p>
+    <form id="f-login">
+      <div class="campo"><label for="clave">Tu clave (llave de GitHub)</label><input type="password" id="clave" autocomplete="current-password" placeholder="github_pat_…" required></div>
+      <label class="check"><input type="checkbox" id="recordar" checked> Recordarla en este dispositivo</label>
+      <div class="error" id="e-login"></div>
+      <button class="boton" style="width:100%" id="b-entrar">Entrar</button>
+    </form>
+    <details class="ayuda">
+      <summary>¿Cómo creo mi clave? (una sola vez)</summary>
+      <ol>
+        <li>Entra a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → crear llave</a>.</li>
+        <li><b>Token name:</b> «Panel emi-pao». <b>Expiration:</b> la más larga.</li>
+        <li><b>Repository access:</b> «Only select repositories» → <b>emi-pao</b>.</li>
+        <li><b>Permissions → Repository → Contents:</b> «Read and write».</li>
+        <li><b>Generate token</b>, cópialo y pégalo aquí. Guárdalo en un lugar seguro: es tu clave.</li>
+      </ol>
+    </details>
+    <p class="suave" style="margin-bottom:0;text-align:center"><a href="../">‹ Volver a los juegos</a></p>
+  </section>
+
+  <section id="app" hidden>
+    <div class="cabecera">
+      <h1>Fotos</h1><span class="esp"></span>
+      <a class="boton vidrio-b" href="../">Juegos</a>
+      <button class="boton vidrio-b" id="salir">Salir</button>
+    </div>
+    <p class="suave" style="margin:0">Después de guardar, los juegos se actualizan en 1 o 2 minutos.</p>
+    <div class="tabs" role="tablist">
+      <button aria-pressed="true" data-tab="rompe">Rompecabezas</button>
+      <button aria-pressed="false" data-tab="junta">Junta fotos</button>
+      <button aria-pressed="false" data-tab="textos">Textos</button>
+    </div>
+
+    <div class="seccion" id="s-rompe">
+      <div id="rompe-lista"></div>
+      <button class="boton" id="agregar">＋ Agregar foto</button>
+      <p class="suave">Se usa el cuadrado del centro de cada foto. Cada foto es un nivel, en este orden.</p>
+    </div>
+
+    <div class="seccion" id="s-junta" hidden>
+      <p class="suave" style="margin-top:0">Cada puesto es una “fruta”: la 1 es la más chiquita (la primera que cae) y la 11 la más grande. Se recortan solas en círculo.</p>
+      <div class="frutas" id="frutas"></div>
+    </div>
+
+    <div class="seccion" id="s-textos" hidden>
+      <div class="vidrio">
+        <h2>Textos del rompecabezas</h2>
+        <div class="campo"><label for="t-titulo">Título</label><input type="text" id="t-titulo"></div>
+        <div class="campo"><label for="t-para">Dedicatoria</label><input type="text" id="t-para"></div>
+        <div class="campo"><label for="t-inicio">Frase de inicio</label><input type="text" id="t-inicio"></div>
+        <div class="campo"><label for="t-final">Mensaje al terminar todas las fotos</label><textarea id="t-final"></textarea></div>
+      </div>
+    </div>
+  </section>
+</main>
+<button class="boton" id="publicar">Guardar cambios</button>
+<input type="file" id="archivo" accept="image/*" hidden>
+<div id="toast" role="status"></div>
+<div id="ocupado">Guardando…</div>
+
+<script>
+"use strict";
+const DUENO = "cardozapaolo22-prog", REPO = "emi-pao";
+const API = `https://api.github.com/repos/${DUENO}/${REPO}`;
+const $ = s => document.querySelector(s);
+const h = (tag, props = {}, ...kids) => { const e = document.createElement(tag); for (const k in props) { const v = props[k]; if (v == null || v === false) continue; if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else if (k === "text") e.textContent = v; else if (k === "class") e.className = v; else e.setAttribute(k, v === true ? "" : v); } e.append(...kids.flat().filter(x => x != null && x !== false)); return e; };
+let tt; const toast = (m, ms = 3200) => { const t = $("#toast"); t.textContent = m; t.classList.add("ver"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("ver"), ms); };
+const ocupado = (v, txt) => { $("#ocupado").textContent = txt || "Guardando…"; $("#ocupado").classList.toggle("ver", v); };
+const leerLS = k => { try { return localStorage.getItem(k) || sessionStorage.getItem(k); } catch (e) { return null; } };
+
+let llave = null, rama = "main";
+const sha = {};                       // ruta -> sha del archivo en GitHub
+const vista = {};                     // ruta -> foto recién subida (para verla antes de que GitHub la publique)
+let R = null, P = null, pendiente = false;
+
+/* ---------- GitHub ---------- */
+async function gh(ruta, opciones = {}) {
+  const r = await fetch(API + ruta, { ...opciones, headers: { Authorization: "Bearer " + llave, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", ...(opciones.body ? { "Content-Type": "application/json" } : {}) } });
+  if (!r.ok) { const e = new Error("GitHub " + r.status); e.status = r.status; try { e.info = await r.json(); } catch (_) {} throw e; }
+  return r.status === 204 ? null : r.json();
+}
+const aBase64 = txt => { const b = new TextEncoder().encode(txt); let s = ""; for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(s); };
+const deBase64 = b64 => new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\s/g, "")), c => c.charCodeAt(0)));
+async function leerArchivo(ruta) { const j = await gh(`/contents/${ruta}?ref=${encodeURIComponent(rama)}`); sha[ruta] = j.sha; return deBase64(j.content); }
+async function escribir(ruta, base64, mensaje) {
+  const cuerpo = { message: mensaje, content: base64, branch: rama }; if (sha[ruta]) cuerpo.sha = sha[ruta];
+  const j = await gh(`/contents/${ruta}`, { method: "PUT", body: JSON.stringify(cuerpo) }); sha[ruta] = j.content.sha; return j;
+}
+function evaluar(txt, nombre) { const w = {}; new Function("window", txt)(w); return w[nombre] || {}; }
+
+/* ---------- config.js de cada juego ---------- */
+const q = v => JSON.stringify(v == null ? "" : v);
+function textoRompe() {
+  return `/* =====================================================================================
+   PERSONALIZA EL ROMPECABEZAS AQUÍ (o más fácil: desde el panel  emi-pao/admin/  con tu clave)
+
+   - Cada nivel es una foto de la carpeta rompecabezas/fotos (se usa el cuadrado del centro).
+   - piezas: 3 = fácil (3x3), 4 = medio (4x4), 5 = difícil (5x5).
+   - mensaje: lo que aparece al terminar esa foto.
+   ===================================================================================== */
+window.ROMPECABEZAS = {
+
+  titulo: ${q(R.titulo)},
+  para: ${q(R.para)},
+  inicio: ${q(R.inicio)},
+
+  niveles: [
+${R.niveles.map(n => `    { foto: ${q(n.foto)}, piezas: ${Number(n.piezas) || 3}, mensaje: ${q(n.mensaje)} }`).join(",\n")}
+  ],
+
+  // Al terminar todas las fotos
+  final: ${q(R.final)},
+
+  // Botón para volver al menú (vacío = no se muestra)
+  enlaceOtroJuego: ${q(R.enlaceOtroJuego)},
+  textoOtroJuego: ${q(R.textoOtroJuego)}
+};
+`;
+}
+function textoJunta() {
+  const t = P.textos || {};
+  return `/* =====================================================================================
+   PERSONALIZA «JUNTA NUESTRAS FOTOS» AQUÍ (o más fácil: desde el panel  emi-pao/admin/  con tu clave)
+
+   - fotos: de la más chica (la primera que cae) a la más grande. Se recortan solas en círculo.
+     Para volver a la fruta original en un puesto, deja sus comillas vacías: ""
+   - version: si cambias una foto a mano y el celular sigue mostrando la vieja, súbelo (2, 3...).
+   ===================================================================================== */
+window.PERSONALIZAR = {
+
+  titulo: ${q(P.titulo)},
+
+  fotos: [
+${(P.fotos || []).map(f => "    " + q(f)).join(",\n")}
+  ],
+
+  textos: {
+${Object.keys(t).map(k => `    ${k}: ${q(t[k])}`).join(",\n")}
+  },
+
+  enlaceMasJuegos: ${q(P.enlaceMasJuegos)},
+
+  version: ${Number(P.version) || 1}
+};
+`;
+}
+async function publicarRompe(msg) { await escribir("rompecabezas/config.js", aBase64(textoRompe()), msg); }
+async function publicarJunta(msg) { await escribir("personalizar/config.js", aBase64(textoJunta()), msg); }
+
+/* ---------- fotos ---------- */
+function elegirFoto() {
+  return new Promise(ok => {
+    const inp = $("#archivo"); inp.value = "";
+    inp.onchange = () => { const f = inp.files && inp.files[0]; if (!f) return ok(null); const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = () => ok(null); r.readAsDataURL(f); };
+    inp.click();
+  });
+}
+async function comprimir(src, lado, calidad) {
+  const img = await new Promise((ok, mal) => { const i = new Image(); i.onload = () => ok(i); i.onerror = mal; i.src = src; });
+  const m = Math.min(img.naturalWidth, img.naturalHeight), n = Math.min(lado, m);
+  const c = document.createElement("canvas"); c.width = c.height = n;
+  const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, n, n);
+  g.drawImage(img, (img.naturalWidth - m) / 2, (img.naturalHeight - m) / 2, m, m, 0, 0, n, n);
+  return c.toDataURL("image/jpeg", calidad);
+}
+const marca = () => Date.now().toString(36);
+async function subirFoto(ruta, dataURL, msg) { await escribir(ruta, dataURL.split(",")[1], msg); vista[ruta] = dataURL; }
+
+/* ---------- pintar ---------- */
+const srcRompe = f => vista["rompecabezas/" + f] || (/^(https?:|data:|\/)/.test(f) ? f : "../rompecabezas/" + f);
+const srcJunta = f => vista[f] || (f ? "../" + f : "");
+function pintar() { pintarRompe(); pintarJunta(); pintarTextos(); $("#publicar").classList.toggle("ver", pendiente); }
+function cambiado() { pendiente = true; $("#publicar").classList.add("ver"); }
+
+function pintarRompe() {
+  const lista = R.niveles;
+  $("#rompe-lista").replaceChildren(...lista.map((n, i) => {
+    const msg = h("textarea", { "aria-label": "Mensaje de la foto " + (i + 1), placeholder: "Mensaje que aparece al armarla" }); msg.value = n.mensaje || "";
+    msg.addEventListener("input", () => { n.mensaje = msg.value; cambiado(); });
+    const pz = h("select", { "aria-label": "Dificultad" }, [[3, "3×3 · fácil"], [4, "4×4 · medio"], [5, "5×5 · difícil"]].map(([v, l]) => h("option", { value: v, selected: (Number(n.piezas) || 3) === v }, l)));
+    pz.addEventListener("change", () => { n.piezas = Number(pz.value); cambiado(); });
+    const mover = d => { const j = i + d; [lista[i], lista[j]] = [lista[j], lista[i]]; cambiado(); pintarRompe(); };
+    return h("div", { class: "nivel" },
+      h("img", { class: "foto", src: srcRompe(n.foto), alt: "Foto " + (i + 1) }),
+      h("div", null,
+        h("div", { class: "num", text: "Foto " + (i + 1) }),
+        h("div", { style: "display:grid;gap:6px;margin-top:6px" }, pz, msg),
+        h("div", { class: "acciones" },
+          i > 0 ? h("button", { class: "mini", onclick: () => mover(-1) }, "↑ Subir") : null,
+          i < lista.length - 1 ? h("button", { class: "mini", onclick: () => mover(1) }, "↓ Bajar") : null,
+          h("button", { class: "mini", onclick: () => cambiarNivel(n) }, "Cambiar foto"),
+          lista.length > 1 ? h("button", { class: "mini rojo", onclick: () => { if (confirm("¿Quitar esta foto del rompecabezas?")) { lista.splice(i, 1); cambiado(); pintarRompe(); } } }, "Quitar") : null)));
+  }));
+}
+function pintarJunta() {
+  const fotos = P.fotos || [], nombres = ["la más chiquita", "", "", "", "", "", "", "", "", "", "la más grande"];
+  $("#frutas").replaceChildren(...Array.from({ length: 11 }, (_, i) => {
+    const f = fotos[i] || "", original = "personalizar/fotos/fruta-" + String(i + 1).padStart(2, "0") + ".png", esOriginal = !f || f === original;
+    return h("div", { class: "fruta" },
+      h("span", { class: "etiqueta" + (esOriginal ? " orig" : ""), text: esOriginal ? "ORIGINAL" : "NUEVA" }),
+      h("div", { class: "circulo" }, f ? h("img", { src: srcJunta(f), alt: "" }) : null),
+      h("b", { text: "Puesto " + (i + 1) }), h("small", { text: nombres[i] }),
+      h("div", { class: "acciones", style: "justify-content:center;margin-top:0" },
+        h("button", { class: "mini", onclick: () => cambiarFruta(i) }, "Cambiar"),
+        !esOriginal ? h("button", { class: "mini rojo", onclick: () => volverFruta(i, original) }, "Original") : null));
+  }));
+}
+function pintarTextos() {
+  for (const k of ["titulo", "para", "inicio", "final"]) { const el = $("#t-" + k); if (document.activeElement !== el) el.value = R[k] || ""; }
+}
+for (const k of ["titulo", "para", "inicio", "final"]) $("#t-" + k).addEventListener("input", e => { R[k] = e.target.value; cambiado(); });
+
+/* ---------- acciones ---------- */
+const errorTxt = e => e && (e.status === 401 || e.status === 403) ? "Tu clave no tiene permiso para guardar. Revisa que tenga «Contents: Read and write» para emi-pao."
+  : e && e.status === 409 ? "Alguien cambió el repositorio al mismo tiempo. Recarga la página e intenta de nuevo."
+  : "No se pudo guardar. Revisa tu internet e intenta de nuevo.";
+async function seguro(fn, txt) { ocupado(true, txt); try { await fn(); } catch (e) { console.error(e); toast(errorTxt(e), 5000); } finally { ocupado(false); pintar(); } }
+
+async function agregar() {
+  const f = await elegirFoto(); if (!f) return;
+  seguro(async () => {
+    const ruta = "fotos/foto-" + marca() + ".jpg";
+    await subirFoto("rompecabezas/" + ruta, await comprimir(f, 1000, .85), "Panel: nueva foto del rompecabezas");
+    R.niveles.push({ foto: ruta, piezas: 3, mensaje: "" });
+    await publicarRompe("Panel: rompecabezas actualizado"); pendiente = false;
+    toast("Foto agregada ✓ Escríbele su mensaje y guarda.");
+  }, "Subiendo foto…");
+}
+async function cambiarNivel(n) {
+  const f = await elegirFoto(); if (!f) return;
+  seguro(async () => {
+    const ruta = "fotos/foto-" + marca() + ".jpg";
+    await subirFoto("rompecabezas/" + ruta, await comprimir(f, 1000, .85), "Panel: foto del rompecabezas cambiada");
+    n.foto = ruta; await publicarRompe("Panel: rompecabezas actualizado"); pendiente = false;
+    toast("Foto cambiada ✓");
+  }, "Subiendo foto…");
+}
+async function cambiarFruta(i) {
+  const f = await elegirFoto(); if (!f) return;
+  seguro(async () => {
+    const ruta = "personalizar/fotos/fruta-" + String(i + 1).padStart(2, "0") + "-" + marca() + ".jpg";
+    await subirFoto(ruta, await comprimir(f, 420, .88), "Panel: foto de Junta nuestras fotos");
+    P.fotos[i] = ruta; P.version = (Number(P.version) || 1) + 1;
+    await publicarJunta("Panel: fotos de Junta nuestras fotos");
+    toast("Foto cambiada ✓ Se verá en el juego en 1–2 minutos.");
+  }, "Subiendo foto…");
+}
+function volverFruta(i, original) {
+  seguro(async () => { P.fotos[i] = original; P.version = (Number(P.version) || 1) + 1; await publicarJunta("Panel: volver a la foto original"); toast("Volvió la foto original ✓"); });
+}
+$("#agregar").onclick = agregar;
+$("#publicar").onclick = () => seguro(async () => { await publicarRompe("Panel: rompecabezas actualizado"); pendiente = false; toast("Guardado ✓ Se verá en el juego en 1–2 minutos."); });
+window.addEventListener("beforeunload", e => { if (pendiente) { e.preventDefault(); e.returnValue = ""; } });
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  document.querySelectorAll(".seccion").forEach(s => s.hidden = s.id !== "s-" + b.dataset.tab);
+});
+
+/* ---------- entrar ---------- */
+async function entrar(clave, recordar) {
+  llave = clave.trim();
+  const repo = await gh("");
+  rama = repo.default_branch || "main";
+  if (repo.permissions && repo.permissions.push === false) { const e = new Error("sin permiso"); e.status = 403; throw e; }
+  ocupado(true, "Cargando fotos…");
+  try {
+    R = evaluar(await leerArchivo("rompecabezas/config.js"), "ROMPECABEZAS"); R.niveles = R.niveles || [];
+    P = evaluar(await leerArchivo("personalizar/config.js"), "PERSONALIZAR"); P.fotos = P.fotos || [];
+  } finally { ocupado(false); }
+  try { (recordar ? localStorage : sessionStorage).setItem("emipao-llave", llave); } catch (e) {}
+  $("#login").hidden = true; $("#app").hidden = false; pintar();
+}
+$("#f-login").onsubmit = async e => {
+  e.preventDefault(); $("#e-login").textContent = ""; $("#b-entrar").disabled = true;
+  try { await entrar($("#clave").value, $("#recordar").checked); $("#clave").value = ""; }
+  catch (err) {
+    console.error(err);
+    $("#e-login").textContent = err.status === 401 ? "Clave incorrecta o vencida." : err.status === 404 || err.status === 403 ? "Esa clave no tiene acceso a emi-pao. Revisa el paso 3 y 4." : "No se pudo conectar. Revisa tu internet.";
+  }
+  $("#b-entrar").disabled = false;
+};
+$("#salir").onclick = () => { try { localStorage.removeItem("emipao-llave"); sessionStorage.removeItem("emipao-llave"); } catch (e) {} location.reload(); };
+const guardada = leerLS("emipao-llave");
+if (guardada) entrar(guardada, true).catch(() => { $("#e-login").textContent = "Tu clave guardada ya no funciona. Escribe una nueva."; });
+</script>
+</body>
+</html>

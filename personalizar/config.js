@@ -40,11 +40,11 @@ window.PERSONALIZAR = {
     record:       "Récord:",
     empezar:      "Empezar",
     jugarOtraVez: "Jugar otra vez",
-    masJuegos:    "Nuestro rompecabezas"
+    masJuegos:    "Más juegos"
   },
 
   // Adónde lleva el botón "más juegos" del final (vacío = no hace nada)
-  enlaceMasJuegos: "rompecabezas/",
+  enlaceMasJuegos: "./",
 
   // Si cambiaste una foto y el celular sigue mostrando la vieja, sube este número (2, 3...)
   version: 1

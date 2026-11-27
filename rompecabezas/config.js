@@ -30,5 +30,5 @@ window.ROMPECABEZAS = {
 
   // Botón para ir al otro juego (vacío = no se muestra)
   enlaceOtroJuego: "../",
-  textoOtroJuego: "Jugar a juntar nuestras fotos"
+  textoOtroJuego: "← Menú de juegos"
 };
